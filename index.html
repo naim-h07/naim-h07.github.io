@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Naim Hashan — Front Office &amp; Guest Relations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;1,9..144,450&family=Work+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1C1B17;
+    --forest:#15332B;
+    --forest-deep:#0E241D;
+    --ivory:#F6F1E7;
+    --brass:#B08D57;
+    --brass-light:#D9BD8C;
+    --sage:#7C9A82;
+    --rule: rgba(176,141,87,0.35);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--ivory);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3, .serif{
+    font-family:'Fraunces', serif;
+    font-weight:450;
+    letter-spacing:-0.01em;
+  }
+
+  .mono{
+    font-family:'Space Mono', monospace;
+  }
+
+  a{color:inherit;}
+
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(246,241,231,0.9);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--rule);
+  }
+  nav .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding-top:18px;
+    padding-bottom:18px;
+  }
+  .brand{
+    font-family:'Fraunces', serif;
+    font-size:1.05rem;
+    letter-spacing:0.04em;
+  }
+  .brand span{color:var(--brass);}
+  .navlinks{
+    display:flex;
+    gap:26px;
+    list-style:none;
+  }
+  .navlinks a{
+    text-decoration:none;
+    font-size:0.78rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--ink);
+    position:relative;
+    padding-bottom:4px;
+    white-space:nowrap;
+  }
+  .navlinks a::after{
+    content:"";
+    position:absolute;
+    left:0; bottom:0;
+    width:0%;
+    height:1px;
+    background:var(--brass);
+    transition:width 0.3s ease;
+  }
+  .navlinks a:hover::after{width:100%;}
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    background:
+      radial-gradient(circle at 85% 10%, rgba(176,141,87,0.12), transparent 45%),
+      linear-gradient(180deg, var(--forest) 0%, var(--forest-deep) 100%);
+    color:var(--ivory);
+    padding:96px 0 88px;
+    position:relative;
+    overflow:hidden;
+  }
+  header.hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 64px);
+    pointer-events:none;
+  }
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--brass-light);
+    margin-bottom:22px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:26px;
+    height:1px;
+    background:var(--brass-light);
+    display:inline-block;
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 6vw, 4.6rem);
+    font-weight:450;
+    line-height:1.02;
+    max-width:760px;
+  }
+  .hero .role{
+    margin-top:20px;
+    font-size:clamp(1.05rem, 2vw, 1.3rem);
+    color:#D8CFB8;
+    max-width:580px;
+    font-weight:300;
+  }
+  .hero .role strong{color:var(--brass-light); font-weight:500;}
+
+  /* split-flap board */
+  .board{
+    margin-top:56px;
+    display:inline-flex;
+    align-items:center;
+    gap:14px;
+    border:1px solid var(--rule);
+    padding:14px 20px;
+    background:rgba(0,0,0,0.18);
+    border-radius:2px;
+  }
+  .board .board-label{
+    font-family:'Space Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.18em;
+    color:#8FA593;
+    text-transform:uppercase;
+    white-space:nowrap;
+  }
+  .flap-row{
+    display:flex;
+    gap:4px;
+  }
+  .flap{
+    position:relative;
+    width:22px;
+    height:32px;
+    background:#0B1E17;
+    border-radius:2px;
+    overflow:hidden;
+    box-shadow: inset 0 0 0 1px rgba(217,189,140,0.18);
+  }
+  .flap span{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Space Mono', monospace;
+    font-size:1.02rem;
+    color:var(--brass-light);
+  }
+  .flap::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; top:50%;
+    height:1px;
+    background:rgba(0,0,0,0.45);
+  }
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section{
+    padding:96px 0;
+  }
+  .section.dark{
+    background:var(--forest);
+    color:var(--ivory);
+  }
+  .kicker{
+    font-family:'Space Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--brass);
+    margin-bottom:14px;
+  }
+  .section h2{
+    font-size:clamp(1.7rem, 3vw, 2.3rem);
+    font-weight:450;
+    margin-bottom:44px;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:200px 1fr;
+    gap:56px;
+    align-items:start;
+  }
+  .monogram{
+    width:160px;
+    height:160px;
+    border:1px solid var(--rule);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Fraunces', serif;
+    font-size:2.6rem;
+    color:var(--forest);
+    background:linear-gradient(160deg, #fff, #ECE4D2);
+  }
+  .about-grid p{
+    font-size:1.05rem;
+    max-width:620px;
+    color:#3A382F;
+  }
+  .about-grid p + p{margin-top:16px;}
+
+  /* ---------- LEDGER (Experience & Education) ---------- */
+  .ledger{
+    border-top:1px solid var(--rule);
+  }
+  .ledger-row{
+    display:grid;
+    grid-template-columns:120px 1fr;
+    gap:28px;
+    padding:32px 0;
+    border-bottom:1px solid var(--rule);
+  }
+  .ledger-status{
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--brass-light);
+    padding-top:4px;
+  }
+  .ledger-row h3{
+    font-size:1.35rem;
+    font-weight:450;
+    color:var(--ivory);
+  }
+  .ledger-row .post{
+    font-family:'Space Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.05em;
+    color:var(--sage);
+    margin-top:6px;
+    text-transform:uppercase;
+  }
+  .ledger-row p{
+    margin-top:14px;
+    color:#CFC8B4;
+    max-width:560px;
+    font-size:0.98rem;
+  }
+  .ledger-note{
+    margin-top:24px;
+    font-family:'Space Mono', monospace;
+    font-size:0.76rem;
+    color:#8FA593;
+    letter-spacing:0.02em;
+  }
+
+  /* ---------- GRID CARDS (Skills & Ventures) ---------- */
+  .amenities{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:1px;
+    background:var(--rule);
+    border:1px solid var(--rule);
+  }
+  .amenity{
+    background:var(--ivory);
+    padding:30px 28px;
+    display:flex;
+    gap:18px;
+    align-items:flex-start;
+  }
+  .amenity .check{
+    width:22px;
+    height:22px;
+    flex:none;
+    border:1px solid var(--brass);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-top:3px;
+  }
+  .amenity .check::after{
+    content:"";
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--brass);
+  }
+  .amenity h4{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:1.05rem;
+    margin-bottom:6px;
+  }
+  .amenity p{
+    font-size:0.92rem;
+    color:#565349;
+  }
+
+  .skill-group{margin-top:40px;}
+  .skill-group:first-child{margin-top:0;}
+  .sub-kicker{
+    font-family:'Space Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:#8A8672;
+    margin-bottom:14px;
+  }
+  .chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  .chip{
+    font-family:'Space Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    border:1px solid var(--brass);
+    color:var(--forest);
+    padding:8px 16px;
+    border-radius:999px;
+    background:rgba(176,141,87,0.08);
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact-card{
+    display:flex;
+    flex-wrap:wrap;
+    gap:48px;
+    justify-content:space-between;
+    align-items:center;
+    padding:48px;
+    border:1px solid var(--rule);
+    background:rgba(0,0,0,0.15);
+  }
+  .contact-card h3{
+    font-size:1.7rem;
+    max-width:360px;
+    font-weight:450;
+  }
+  .contact-list{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    font-family:'Space Mono', monospace;
+    font-size:0.88rem;
+  }
+  .contact-list .lbl{
+    color:var(--sage);
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    font-size:0.68rem;
+    margin-right:10px;
+  }
+  .contact-list a{
+    color:var(--brass-light);
+    text-decoration:none;
+    border-bottom:1px solid transparent;
+    transition:border-color 0.2s ease;
+  }
+  .contact-list a:hover{border-color:var(--brass-light);}
+  .bell-btn{
+    display:inline-block;
+    font-family:'Space Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--forest-deep);
+    background:var(--brass-light);
+    border:none;
+    text-decoration:none;
+    padding:14px 26px;
+    cursor:pointer;
+    transition:background 0.2s ease, transform 0.2s ease;
+  }
+  .bell-btn:hover{background:var(--brass); transform:translateY(-1px);}
+  .bell-btn:focus-visible{outline:2px solid var(--ivory); outline-offset:3px;}
+
+  footer{
+    padding:36px 0;
+    text-align:center;
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.08em;
+    color:#8A8672;
+    text-transform:uppercase;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 720px){
+    nav .wrap{flex-direction:column; align-items:flex-start; gap:14px;}
+    .navlinks{gap:16px; flex-wrap:wrap;}
+    .about-grid{grid-template-columns:1fr;}
+    .monogram{width:100px; height:100px; font-size:1.8rem;}
+    .ledger-row{grid-template-columns:1fr;}
+    .amenities{grid-template-columns:1fr;}
+    .contact-card{flex-direction:column; align-items:flex-start; padding:32px;}
+    .board{flex-wrap:wrap;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .flap span{transition:none !important;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">NAIM <span>HASHAN</span></div>
+    <ul class="navlinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#beyond">Beyond the Desk</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Front Office &middot; Dhaka, Bangladesh</div>
+    <h1>Naim Hashan</h1>
+    <p class="role">Guest Services Agent at <strong>InterContinental Dhaka</strong>, specialising in guest relations and front desk operations from arrival to departure.</p>
+
+    <div class="board" aria-label="Service journey display">
+      <span class="board-label">Now Serving</span>
+      <div class="flap-row" id="flapRow"></div>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="kicker">About</div>
+    <div class="about-grid">
+      <div class="monogram">NH</div>
+      <div>
+        <p>Every stay begins and ends at the front desk — that's where I work. I focus on turning a routine check-in into a welcome, and a checkout into a reason to come back, through attention to detail and genuine hospitality rather than a script.</p>
+        <p>Across three Dhaka properties I've handled guest inquiries and concerns, coordinated with teams across departments, and kept service consistent under the pace of a busy lobby. Alongside the front desk, I've run photography ventures and taught as an instructor — and I'm now completing a Master's in Management Information Systems, bringing a more analytical eye to hospitality operations.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section dark" id="experience">
+  <div class="wrap">
+    <div class="kicker">Experience</div>
+    <h2>Front Office Record</h2>
+    <div class="ledger">
+      <div class="ledger-row">
+        <div class="ledger-status">2025 — Present</div>
+        <div>
+          <h3>InterContinental Dhaka</h3>
+          <div class="post">Guest Services Agent, Front Office</div>
+          <p>Manage the full guest journey from check-in to check-out, resolving inquiries and concerns while delivering the personalised service the property is known for.</p>
+        </div>
+      </div>
+      <div class="ledger-row">
+        <div class="ledger-status">2024 — 2025</div>
+        <div>
+          <h3>Holiday Inn Dhaka City Centre</h3>
+          <div class="post">F&amp;B Guest Services Agent</div>
+          <p>Provided guest services with a food &amp; beverage focus, strengthening the cross-department coordination that now supports front office work.</p>
+        </div>
+      </div>
+      <div class="ledger-row">
+        <div class="ledger-status">2023 — 2024</div>
+        <div>
+          <h3>Hotel Radisson Blu Dhaka</h3>
+          <div class="post">Food and Beverage Service Assistant</div>
+          <p>Delivered attentive F&amp;B service at a five-star property, building the guest-facing discipline and teamwork that carried into front office work.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="beyond">
+  <div class="wrap">
+    <div class="kicker">Beyond the Desk</div>
+    <h2>Parallel Ventures, 2021 – 2024</h2>
+    <div class="amenities">
+      <div class="amenity">
+        <div class="check"></div>
+        <div>
+          <h4>Moments of Life — Owner &amp; Chief</h4>
+          <p>Photography Specialist &middot; Feb 2021 – Jun 2024. An independently run photography venture, from booking through delivery.</p>
+        </div>
+      </div>
+      <div class="amenity">
+        <div class="check"></div>
+        <div>
+          <h4>Moments Wizard — Photographer</h4>
+          <p>Photography Specialist &middot; Feb 2021 – Jun 2023. A second photography practice, run in parallel with the first.</p>
+        </div>
+      </div>
+      <div class="amenity">
+        <div class="check"></div>
+        <div>
+          <h4>Damex Digital Ltd — Instructor</h4>
+          <p>Jan 2021 – Dec 2022. Taught digital tools and skills to students and professionals.</p>
+        </div>
+      </div>
+      <div class="amenity">
+        <div class="check"></div>
+        <div>
+          <h4>Tools Lab — Product Specialist</h4>
+          <p>Jan 2021 – Dec 2022. Demonstrated and advised on products for customers.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section dark" id="education">
+  <div class="wrap">
+    <div class="kicker">Education</div>
+    <h2>Academic Record</h2>
+    <div class="ledger">
+      <div class="ledger-row">
+        <div class="ledger-status">2026</div>
+        <div>
+          <h3>University of Dhaka</h3>
+          <div class="post">Master of Professional MIS &middot; Dept. of Management Information Systems</div>
+          <p>Expected June 2026 — bringing systems and data thinking to hospitality operations.</p>
+        </div>
+      </div>
+      <div class="ledger-row">
+        <div class="ledger-status">2019 — 2025</div>
+        <div>
+          <h3>University of Dhaka</h3>
+          <div class="post">BBA &middot; Management</div>
+          <p>Bachelor's degree grounding the business side of a hospitality career.</p>
+        </div>
+      </div>
+      <div class="ledger-row">
+        <div class="ledger-status">2022 — 2024</div>
+        <div>
+          <h3>UPDATE College</h3>
+          <div class="post">Professional Diploma in Front Office</div>
+          <p>Formal training in the front office discipline now practiced day to day.</p>
+        </div>
+      </div>
+    </div>
+    <p class="ledger-note">Earlier education: RAJUK Uttara Model College, High School Diploma (2018) &middot; Adamjee Cantonment Public School, Middle School Diploma (2016)</p>
+  </div>
+</section>
+
+<section class="section" id="skills">
+  <div class="wrap">
+    <div class="kicker">Skills</div>
+    <h2>Skills, By Department</h2>
+
+    <div class="skill-group">
+      <div class="sub-kicker">Hospitality</div>
+      <div class="chips">
+        <span class="chip">Guest Relations</span>
+        <span class="chip">Front Office Operations</span>
+        <span class="chip">Service Recovery</span>
+        <span class="chip">Guest Satisfaction</span>
+        <span class="chip">Customer Experience Management</span>
+        <span class="chip">Hotel Operations</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="sub-kicker">Management</div>
+      <div class="chips">
+        <span class="chip">Team Collaboration</span>
+        <span class="chip">Business Communication</span>
+        <span class="chip">Customer Relationship Management</span>
+        <span class="chip">Operational Coordination</span>
+        <span class="chip">Service Leadership</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="sub-kicker">Technology &amp; Analytics</div>
+      <div class="chips">
+        <span class="chip">Databases</span>
+        <span class="chip">Data Mining</span>
+        <span class="chip">Information Systems</span>
+        <span class="chip">Business Analytics</span>
+        <span class="chip">Data Management</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section dark" id="contact">
+  <div class="wrap">
+    <div class="kicker">Contact</div>
+    <h2>Ring for Service</h2>
+    <div class="contact-card">
+      <h3>Open to new front office and guest relations opportunities in hospitality.</h3>
+      <div class="contact-list">
+        <div><span class="lbl">Email</span><a href="mailto:naim.h07@outlook.com">naim.h07@outlook.com</a></div>
+        <div><span class="lbl">Phone</span><a href="tel:+8801951670907">+880 1951 670907</a></div>
+        <div><span class="lbl">LinkedIn</span><a href="https://www.linkedin.com/in/naim-h07" target="_blank" rel="noopener">linkedin.com/in/naim-h07</a></div>
+        <div><span class="lbl">Instagram</span><a href="https://instagram.com/naim.h07" target="_blank" rel="noopener">@naim.h07</a></div>
+        <div><span class="lbl">Facebook</span><a href="https://facebook.com/naim.h07" target="_blank" rel="noopener">facebook.com/naim.h07</a></div>
+        <div><span class="lbl">Based</span>Dhaka Cantonment, Dhaka 1206</div>
+      </div>
+      <a class="bell-btn" href="mailto:naim.h07@outlook.com">Ring the Bell</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Naim Hashan &middot; Front Office &amp; Guest Relations &middot; Dhaka
+</footer>
+
+<script>
+  const words = ["WELCOME", "CHECK-IN", "RECOGNIZE", "GUEST CARE", "CHECK-OUT", "FAREWELL"];
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ -";
+  const maxLen = Math.max(...words.map(w => w.length));
+  const row = document.getElementById('flapRow');
+  const flaps = [];
+
+  for(let i=0; i<maxLen; i++){
+    const flap = document.createElement('div');
+    flap.className = 'flap';
+    const s = document.createElement('span');
+    s.textContent = ' ';
+    flap.appendChild(s);
+    row.appendChild(flap);
+    flaps.push(s);
+  }
+
+  function padWord(w){
+    const pad = maxLen - w.length;
+    const left = Math.floor(pad/2);
+    return ' '.repeat(left) + w + ' '.repeat(pad-left);
+  }
+
+  let wordIndex = 0;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function setWord(word, animate){
+    const padded = padWord(word);
+    padded.split('').forEach((ch, i) => {
+      if(!animate){
+        flaps[i].textContent = ch;
+        return;
+      }
+      let ticks = 4 + Math.floor(Math.random()*5);
+      let count = 0;
+      const interval = setInterval(() => {
+        flaps[i].textContent = chars[Math.floor(Math.random()*chars.length)];
+        count++;
+        if(count >= ticks){
+          clearInterval(interval);
+          flaps[i].textContent = ch;
+        }
+      }, 45);
+    });
+  }
+
+  setWord(words[0], false);
+
+  if(!reduceMotion){
+    setInterval(() => {
+      wordIndex = (wordIndex + 1) % words.length;
+      setWord(words[wordIndex], true);
+    }, 2600);
+  }
+</script>
+
+</body>
+</html>
